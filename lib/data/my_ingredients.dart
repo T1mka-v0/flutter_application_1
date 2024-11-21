@@ -3,20 +3,25 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 
 class MyIngredients extends ChangeNotifier {
-  final List<Map<String, dynamic>> _myIngredients = [
-    {"id": 0, "title": "водка"}
-  ];
-  UnmodifiableListView<String> get myIngredients =>
-      UnmodifiableListView(_myIngredients);
+  final List<String> _myIngredients = ['вода'];
+  List<String> get getMyIngredients => UnmodifiableListView(_myIngredients);
   int get totalCountOfIngredients => _myIngredients.length;
   void addIngredient(String ingredient) {
-    _myIngredients.add(ingredient);
-    notifyListeners();
+    if (_myIngredients.contains(ingredient)) {
+      return;
+    } else {
+      _myIngredients.add(ingredient);
+      notifyListeners();
+    }
   }
 
   void deleteIngredient(String ingredient) {
-    _myIngredients.remove(ingredient);
-    notifyListeners();
+    if (_myIngredients.contains(ingredient)) {
+      _myIngredients.remove(ingredient);
+      notifyListeners();
+    } else {
+      return;
+    }
   }
 }
 

@@ -11,12 +11,13 @@ class MyIngredientsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Second Route'),
       ),
-      body: Center(
-          child: Consumer<MyIngredients>(builder: (context, ingredient, child) {
+      body: Center(child:
+          Consumer<MyIngredients>(builder: (context, myIngredientList, child) {
         return ListView.builder(
-            itemCount: ingredient.myIngredients.length,
+            itemCount: myIngredientList.totalCountOfIngredients,
             itemBuilder: (context, index) {
-              return ListTile(title: Text(ingredient.myIngredients[index]));
+              return ListTile(
+                  title: Text(myIngredientList.getMyIngredients[index]));
             });
       })),
     );

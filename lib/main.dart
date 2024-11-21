@@ -41,8 +41,29 @@ class _NavigationExampleState extends State<NavigationExample> {
         children: [
           ...ingredients.map((ingredient) {
             return MyCard(
-              title: ingredient['title'],
-              onPress: () => {myIngredients.addIngredient(ingredient['title'])},
+              title: ingredient,
+              onAdd: () {
+                if (!myIngredients.getMyIngredients.contains(ingredient)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBarOnIngredientChange('Ингредиент добавлен!'));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBarOnIngredientChange(
+                          'Ингредиент уже добавлен в ваш список!'));
+                }
+                myIngredients.addIngredient(ingredient);
+              },
+              onDelete: () {
+                if (myIngredients.getMyIngredients.contains(ingredient)) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBarOnIngredientChange('Ингредиент удалён!'));
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBarOnIngredientChange(
+                          'Ингредиент отсутствует в вашем списке!'));
+                }
+                myIngredients.deleteIngredient(ingredient);
+              },
             );
           }),
         ],
@@ -64,7 +85,17 @@ class _NavigationExampleState extends State<NavigationExample> {
   }
 }
 
+// SnackBar onIngredientChange = SnackBar(content: Text('sd'));
+SnackBar SnackBarOnIngredientChange(String text) {
+  return SnackBar(
+    content: Text(text),
+    duration: const Duration(seconds: 1),
+  );
+}
 
+// class OnIngredientChange extends SnackBar {
+  
+// }
 
 /* Иконки */
 /*
