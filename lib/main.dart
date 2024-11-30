@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'card.dart';
+import 'package:flutter_application_1/ingredients_page.dart';
+import 'package:flutter_application_1/my_ingredients_page.dart';
 import 'data/my_ingredients.dart';
-import 'data/ingredients.dart';
 import 'package:provider/provider.dart';
-import 'my_ingredients_page.dart';
+import 'cocktails_page.dart';
 
 /// Flutter code sample for [NavigationBar].
 
@@ -32,66 +32,57 @@ class NavigationExample extends StatefulWidget {
 }
 
 class _NavigationExampleState extends State<NavigationExample> {
+  int currentPageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    final myIngredients = Provider.of<MyIngredients>(context);
     // final ThemeData theme = Theme.of(context);
     return Scaffold(
-      body: ListView(
-        children: [
-          ...ingredients.map((ingredient) {
-            return MyCard(
-              title: ingredient,
-              onAdd: () {
-                if (!myIngredients.getMyIngredients.contains(ingredient)) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBarOnIngredientChange('Ингредиент добавлен!'));
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBarOnIngredientChange(
-                          'Ингредиент уже добавлен в ваш список!'));
-                }
-                myIngredients.addIngredient(ingredient);
-              },
-              onDelete: () {
-                if (myIngredients.getMyIngredients.contains(ingredient)) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBarOnIngredientChange('Ингредиент удалён!'));
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBarOnIngredientChange(
-                          'Ингредиент отсутствует в вашем списке!'));
-                }
-                myIngredients.deleteIngredient(ingredient);
-              },
-            );
-          }),
-        ],
-      ),
-      appBar: AppBar(
-        actions: [
-          ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const MyIngredientsPage()));
-                // print();
-              },
-              child: const Text('Second page'))
-        ],
-      ),
-    );
+        bottomNavigationBar: NavigationBar(
+          onDestinationSelected: (int index) {
+            setState(() {
+              currentPageIndex = index;
+            });
+          },
+          indicatorColor: Colors.amber,
+          selectedIndex: currentPageIndex,
+          destinations: const <Widget>[
+            NavigationDestination(
+              // selectedIcon: Icon(Icons.home),
+              icon: Icon(Icons.local_bar_rounded),
+              label: 'Коктейли',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.liquor_rounded),
+              label: 'Ингредиенты',
+            ),
+          ],
+        ),
+        body: [
+          CocktailList(),
+          DefaultTabController(
+              length: 2,
+              child: Scaffold(
+                appBar: AppBar(
+                  bottom: const TabBar(tabs: [
+                    Tab(
+                      text: 'Новые',
+                    ),
+                    Tab(
+                      text: 'Мои',
+                    )
+                  ]),
+                  title: const Text('Ингридиенты'),
+                ),
+                body: const TabBarView(
+                    children: [IngredientsPage(), MyIngredientsPage()]),
+              ))
+        ][currentPageIndex]);
   }
 }
 
 // SnackBar onIngredientChange = SnackBar(content: Text('sd'));
-SnackBar SnackBarOnIngredientChange(String text) {
-  return SnackBar(
-    content: Text(text),
-    duration: const Duration(seconds: 1),
-  );
-}
+
 
 // class OnIngredientChange extends SnackBar {
   

@@ -7,19 +7,14 @@ class MyIngredientsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Second Route'),
-      ),
-      body: Center(child:
-          Consumer<MyIngredients>(builder: (context, myIngredientList, child) {
-        return ListView.builder(
-            itemCount: myIngredientList.totalCountOfIngredients,
-            itemBuilder: (context, index) {
-              return ListTile(
-                  title: Text(myIngredientList.getMyIngredients[index]));
-            });
-      })),
-    );
+    return Center(child:
+        Consumer<MyIngredients>(builder: (context, myIngredientList, child) {
+      return ListView.builder(
+          itemCount: myIngredientList.totalCountOfIngredients,
+          itemBuilder: (context, index) {
+            return ListTile(
+                title: Text(myIngredientList.getMyIngredients[index]));
+          });
+    }));
   }
 }
