@@ -20,7 +20,12 @@ class NavigationBarApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData(useMaterial3: true), home: const NavigationExample());
+      theme:
+          ThemeData(useMaterial3: true, colorScheme: const ColorScheme.light()),
+      home: const NavigationExample(),
+      darkTheme:
+          ThemeData(useMaterial3: true, colorScheme: const ColorScheme.dark()),
+    );
   }
 }
 
@@ -59,9 +64,13 @@ class _NavigationExampleState extends State<NavigationExample> {
           ],
         ),
         body: [
-          CocktailList(),
+          Scaffold(
+            appBar: AppBar(title: const Text('Коктейли')),
+            body: CocktailsPage(),
+          ),
           DefaultTabController(
               length: 2,
+              animationDuration: const Duration(milliseconds: 800),
               child: Scaffold(
                 appBar: AppBar(
                   bottom: const TabBar(tabs: [

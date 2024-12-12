@@ -21,6 +21,15 @@ class MyCard extends StatelessWidget {
         child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(16.0), // Радиус скругления
+          child: Image.asset(
+            'assets/$assetName',
+            width: 200,
+            height: 200,
+            fit: BoxFit.cover, // Настройка отображения изображения
+          ),
+        ),
         Text(title),
         Consumer<MyIngredients>(builder: (context, ingredientsList, child) {
           return ElevatedButton(
@@ -31,15 +40,6 @@ class MyCard extends StatelessWidget {
                   ? const Text('Удалить')
                   : const Icon(Icons.add_rounded));
         }),
-        ClipRRect(
-          borderRadius: BorderRadius.circular(16.0), // Радиус скругления
-          child: Image.asset(
-            'assets/$assetName',
-            width: 200,
-            height: 200,
-            fit: BoxFit.cover, // Настройка отображения изображения
-          ),
-        )
       ],
     ));
   }

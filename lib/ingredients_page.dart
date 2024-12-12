@@ -3,16 +3,49 @@ import 'data/ingredients.dart';
 import 'card.dart';
 import 'package:provider/provider.dart';
 import 'data/my_ingredients.dart';
+import 'shared/customSnackBar.dart';
 
-class IngredientsPage extends StatelessWidget {
+class IngredientsPage extends StatefulWidget {
   const IngredientsPage({super.key});
+  @override
+  IngredientsPageState createState() => IngredientsPageState();
+}
+
+class IngredientsPageState extends State<IngredientsPage> {
+  final TextEditingController _controller = TextEditingController();
+  List<String> filteredIngredients = [];
+
+  @override
+  void initState() {
+    super.initState();
+    filteredIngredients = ingredients;
+  }
+
+  void searchIngredients(String query) {
+    setState(() {
+      filteredIngredients = ingredients.where((entry) {
+        return entry.toLowerCase().startsWith(query.toLowerCase());
+      }).toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final myIngredients = Provider.of<MyIngredients>(context);
     return ListView(
       children: [
-        ...ingredients.map((ingredient) {
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          child: TextField(
+            controller: _controller,
+            decoration: const InputDecoration(
+                labelText: 'Поиск...',
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(16.0)))),
+            onChanged: searchIngredients,
+          ),
+        ),
+        ...filteredIngredients.map((ingredient) {
           return MyCard(
             title: ingredient,
             assetName: 'vodka.webp',
@@ -43,11 +76,4 @@ class IngredientsPage extends StatelessWidget {
       ],
     );
   }
-}
-
-SnackBar SnackBarOnIngredientChange(String text) {
-  return SnackBar(
-    content: Text(text),
-    duration: const Duration(seconds: 1),
-  );
 }
