@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/ingredients_page.dart';
-import 'package:flutter_application_1/my_ingredients_page.dart';
-import 'data/my_ingredients.dart';
+import 'package:flutter_application_1/views/ingredients_page.dart';
+import 'package:flutter_application_1/views/my_ingredients_page.dart';
+import 'app/my_ingredients_provider.dart';
 import 'package:provider/provider.dart';
-import 'cocktails_page.dart';
+import 'views/cocktails_page.dart';
 
 /// Flutter code sample for [NavigationBar].
 

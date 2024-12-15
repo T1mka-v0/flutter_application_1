@@ -1,5 +1,4 @@
 import 'dart:collection';
-
 import 'package:flutter/material.dart';
 
 class MyIngredients extends ChangeNotifier {
@@ -24,5 +23,3 @@ class MyIngredients extends ChangeNotifier {
     }
   }
 }
-
-// MyIngredients ingredientsList = MyIngredients();

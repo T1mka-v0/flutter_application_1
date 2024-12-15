@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'data/ingredients.dart';
-import 'card.dart';
+import '../data/ingredients.dart';
+import '../widgets/ingredient_card.dart';
 import 'package:provider/provider.dart';
-import 'data/my_ingredients.dart';
-import 'shared/customSnackBar.dart';
+import '../app/my_ingredients_provider.dart';
+import '../shared/customSnackBar.dart';
 
 class IngredientsPage extends StatefulWidget {
   const IngredientsPage({super.key});
@@ -46,7 +46,7 @@ class IngredientsPageState extends State<IngredientsPage> {
           ),
         ),
         ...filteredIngredients.map((ingredient) {
-          return MyCard(
+          return IngredientCard(
             title: ingredient,
             assetName: 'vodka.webp',
             onAdd: () {

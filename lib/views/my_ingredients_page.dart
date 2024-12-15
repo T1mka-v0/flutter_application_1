@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/card.dart';
-import 'package:flutter_application_1/data/my_ingredients.dart';
+import '../widgets/ingredient_card.dart';
+import '../app/my_ingredients_provider.dart';
 import 'package:provider/provider.dart';
-import 'shared/customSnackBar.dart';
+import '../shared/customSnackBar.dart';
 
 class MyIngredientsPage extends StatelessWidget {
   const MyIngredientsPage({super.key});
@@ -16,7 +16,7 @@ class MyIngredientsPage extends StatelessWidget {
           itemCount: myIngredientList.totalCountOfIngredients,
           itemBuilder: (context, index) {
             String ingredient = myIngredientList.getMyIngredients[index];
-            return MyCard(
+            return IngredientCard(
                 title: ingredient,
                 onAdd: () {
                   if (!myIngredients.getMyIngredients.contains(ingredient)) {

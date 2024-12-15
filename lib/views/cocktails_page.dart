@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'data/сocktails.dart';
-import 'cocktail_card.dart';
+import '../data/сocktails.dart';
+import '../widgets/cocktail_card.dart';
 import 'cocktail_full_card.dart';
 
 class CocktailsPage extends StatefulWidget {

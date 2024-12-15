@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'data/my_ingredients.dart';
+import '../app/my_ingredients_provider.dart';
 
-class MyCard extends StatelessWidget {
+class IngredientCard extends StatelessWidget {
   final String title;
   final VoidCallback onAdd;
   final VoidCallback onDelete;
   final String assetName;
   // final File pic = File('./bloodMary.jpg');
-  const MyCard(
+  const IngredientCard(
       {required this.title,
       required this.onAdd,
       required this.onDelete,
