@@ -24,7 +24,7 @@ class IngredientCard extends StatelessWidget {
         ClipRRect(
           borderRadius: BorderRadius.circular(16.0), // Радиус скругления
           child: Image.asset(
-            'assets/$assetName',
+            'assets/ingredients/$assetName.webp',
             width: 200,
             height: 200,
             fit: BoxFit.cover, // Настройка отображения изображения

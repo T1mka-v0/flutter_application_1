@@ -20,12 +20,12 @@ class CocktailCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               ClipRRect(
-                borderRadius: BorderRadius.circular(16.0), // Радиус скругления
+                borderRadius: BorderRadius.circular(16.0),
                 child: Image.asset(
-                  'assets/$assetName',
-                  width: 200,
-                  height: 200,
-                  fit: BoxFit.cover, // Настройка отображения изображения
+                  'assets/cocktails/$assetName.webp',
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: MediaQuery.of(context).size.height * 0.5,
+                  fit: BoxFit.cover,
                 ),
               ),
               const SizedBox(height: 12),

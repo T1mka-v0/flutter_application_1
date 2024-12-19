@@ -33,9 +33,10 @@ class IngredientsPageState extends State<IngredientsPage> {
   Widget build(BuildContext context) {
     final myIngredients = Provider.of<MyIngredients>(context);
     return ListView(
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
           child: TextField(
             controller: _controller,
             decoration: const InputDecoration(
@@ -48,7 +49,7 @@ class IngredientsPageState extends State<IngredientsPage> {
         ...filteredIngredients.map((ingredient) {
           return IngredientCard(
             title: ingredient,
-            assetName: 'vodka.webp',
+            assetName: 'vodka',
             onAdd: () {
               if (!myIngredients.getMyIngredients.contains(ingredient)) {
                 ScaffoldMessenger.of(context).showSnackBar(

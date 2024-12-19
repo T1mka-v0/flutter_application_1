@@ -40,7 +40,7 @@ class MyIngredientsPage extends StatelessWidget {
                   }
                   myIngredients.deleteIngredient(ingredient);
                 },
-                assetName: 'vodka.webp');
+                assetName: 'vodka');
           });
     }));
   }

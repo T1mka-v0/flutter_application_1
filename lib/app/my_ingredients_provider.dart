@@ -1,23 +1,35 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
-class MyIngredients extends ChangeNotifier {
-  final List<String> _myIngredients = ['вода'];
-  List<String> get getMyIngredients => UnmodifiableListView(_myIngredients);
-  int get totalCountOfIngredients => _myIngredients.length;
+part 'my_ingredients_provider.g.dart';
+
+@HiveType(typeId: 0)
+class MyIngredients extends HiveObject with ChangeNotifier {
+  @HiveField(0)
+  List<String> myIngredients = [];
+
+  List<String> get getMyIngredients => UnmodifiableListView(myIngredients);
+  int get totalCountOfIngredients => myIngredients.length;
   void addIngredient(String ingredient) {
-    if (_myIngredients.contains(ingredient)) {
+    if (myIngredients.contains(ingredient)) {
       return;
     } else {
-      _myIngredients.add(ingredient);
+      myIngredients.add(ingredient);
       notifyListeners();
+      // Hive.box<List<String>>('myIngredientsBox')
+      //     .put('ingredients', myIngredients);
+      save();
     }
   }
 
   void deleteIngredient(String ingredient) {
-    if (_myIngredients.contains(ingredient)) {
-      _myIngredients.remove(ingredient);
+    if (myIngredients.contains(ingredient)) {
+      myIngredients.remove(ingredient);
       notifyListeners();
+      // Hive.box<List<String>>('myIngredientsBox')
+      //     .put('ingredients', myIngredients);
+      save();
     } else {
       return;
     }

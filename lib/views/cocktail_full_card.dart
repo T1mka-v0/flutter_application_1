@@ -21,20 +21,11 @@ class CocktailFullCard extends StatelessWidget {
     }
     return Scaffold(
         appBar: AppBar(),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+        body: ListView(
           children: [
-            // ClipRRect(
-            //     borderRadius: BorderRadius.circular(16.0), // Радиус скругления
-            //     child: ),
-            AspectRatio(
-              aspectRatio: 1,
-              child: Image.asset(
-                'assets/$assetName',
-                width: double.infinity,
-                height: double.infinity,
-                fit: BoxFit.cover, // Настройка отображения изображения
-              ),
+            Image.asset(
+              'assets/cocktails/$assetName.webp',
+              fit: BoxFit.cover, // Настройка отображения изображения
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -42,7 +33,8 @@ class CocktailFullCard extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    style: const TextStyle(
+                        fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     'Рецепт:\n$recipe'.split('. ').join('\n'),

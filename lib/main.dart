@@ -4,15 +4,63 @@ import 'package:flutter_application_1/views/my_ingredients_page.dart';
 import 'app/my_ingredients_provider.dart';
 import 'package:provider/provider.dart';
 import 'views/cocktails_page.dart';
+import './app/my_ingredients_provider.dart';
+// import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'dart:async';
 
 /// Flutter code sample for [NavigationBar].
 
-void main() => runApp(
-      ChangeNotifierProvider(
-        create: (context) => MyIngredients(),
-        child: const NavigationBarApp(),
-      ),
-    );
+void main() async {
+  // WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(MyIngredientsAdapter());
+
+  final box = await Hive.openBox<MyIngredients>('myIngredientsBox');
+  final myIngredients = box.get('ingredients') ?? MyIngredients();
+
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => myIngredients,
+      child: const NavigationBarApp(),
+    ),
+  );
+
+  // print(box.get('ingredients')?.myIngredients ?? 'Коробка пустая');
+  // if (box.get('ingredients') == null) {
+  //   box.put('ingredients', ingredients);
+  // }
+
+  // var testbox = await Hive.openBox<String>('testBox');
+  // print('Saved value: ${box.get('key')}');
+  // testbox.put('key', 'value');
+
+  // runZonedGuarded(() {
+  //   runApp(
+  //     ChangeNotifierProvider(
+  //       create: (context) => ingredients,
+  //       child: const NavigationBarApp(),
+  //     ),
+  //   );
+  // }, (error, stackTrace) async {
+  //   await box.close(); // Закрыть коробку при возникновении ошибки
+  // });
+
+  // WidgetsBinding.instance.addObserver(_LifecycleHandler(box));
+}
+
+// class _LifecycleHandler extends WidgetsBindingObserver {
+//   final Box box;
+
+//   _LifecycleHandler(this.box);
+
+//   @override
+//   void didChangeAppLifecycleState(AppLifecycleState state) {
+//     if (state == AppLifecycleState.detached) {
+//       box.close();
+//     }
+//   }
+// }
 
 class NavigationBarApp extends StatelessWidget {
   const NavigationBarApp({super.key});
@@ -38,6 +86,13 @@ class NavigationExample extends StatefulWidget {
 
 class _NavigationExampleState extends State<NavigationExample> {
   int currentPageIndex = 0;
+
+  @override
+  void dispose() async {
+    // var box = await Hive.openBox<MyIngredients>('myIngredientsBox');
+    Hive.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

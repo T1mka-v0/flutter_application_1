@@ -34,7 +34,7 @@ class CocktailsPageState extends State<CocktailsPage> {
         child: Column(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: TextField(
             controller: _controller,
             decoration: const InputDecoration(
@@ -57,12 +57,12 @@ class CocktailsPageState extends State<CocktailsPage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => CocktailFullCard(
-                              assetName: 'vodka.webp',
+                              assetName: cocktailName,
                               title: cocktailName,
                               recipe: recipe)));
                 },
                 child:
-                    CocktailCard(assetName: 'vodka.webp', title: cocktailName),
+                    CocktailCard(assetName: cocktailName, title: cocktailName),
               );
             },
           ),
