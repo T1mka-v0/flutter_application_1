@@ -17,8 +17,6 @@ class MyIngredients extends HiveObject with ChangeNotifier {
     } else {
       myIngredients.add(ingredient);
       notifyListeners();
-      // Hive.box<List<String>>('myIngredientsBox')
-      //     .put('ingredients', myIngredients);
       save();
     }
   }
@@ -27,8 +25,6 @@ class MyIngredients extends HiveObject with ChangeNotifier {
     if (myIngredients.contains(ingredient)) {
       myIngredients.remove(ingredient);
       notifyListeners();
-      // Hive.box<List<String>>('myIngredientsBox')
-      //     .put('ingredients', myIngredients);
       save();
     } else {
       return;

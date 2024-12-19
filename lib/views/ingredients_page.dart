@@ -3,7 +3,8 @@ import '../data/ingredients.dart';
 import '../widgets/ingredient_card.dart';
 import 'package:provider/provider.dart';
 import '../app/my_ingredients_provider.dart';
-import '../shared/customSnackBar.dart';
+import '../shared/custom_snack_bar.dart';
+import '../widgets/custom_text_field.dart';
 
 class IngredientsPage extends StatefulWidget {
   const IngredientsPage({super.key});
@@ -36,16 +37,8 @@ class IngredientsPageState extends State<IngredientsPage> {
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
-          child: TextField(
-            controller: _controller,
-            decoration: const InputDecoration(
-                labelText: 'Поиск...',
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16.0)))),
-            onChanged: searchIngredients,
-          ),
-        ),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 0),
+            child: customTextField(searchIngredients, _controller)),
         ...filteredIngredients.map((ingredient) {
           return IngredientCard(
             title: ingredient,
@@ -53,10 +46,10 @@ class IngredientsPageState extends State<IngredientsPage> {
             onAdd: () {
               if (!myIngredients.getMyIngredients.contains(ingredient)) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBarOnIngredientChange('Ингредиент добавлен!'));
+                    snackBarOnIngredientChange('Ингредиент добавлен!'));
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBarOnIngredientChange(
+                    snackBarOnIngredientChange(
                         'Ингредиент уже добавлен в ваш список!'));
               }
               myIngredients.addIngredient(ingredient);
@@ -64,10 +57,10 @@ class IngredientsPageState extends State<IngredientsPage> {
             onDelete: () {
               if (myIngredients.getMyIngredients.contains(ingredient)) {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBarOnIngredientChange('Ингредиент удалён!'));
+                    snackBarOnIngredientChange('Ингредиент удалён!'));
               } else {
                 ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBarOnIngredientChange(
+                    snackBarOnIngredientChange(
                         'Ингредиент отсутствует в вашем списке!'));
               }
               myIngredients.deleteIngredient(ingredient);

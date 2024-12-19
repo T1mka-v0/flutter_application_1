@@ -7,7 +7,6 @@ class IngredientCard extends StatelessWidget {
   final VoidCallback onAdd;
   final VoidCallback onDelete;
   final String assetName;
-  // final File pic = File('./bloodMary.jpg');
   const IngredientCard(
       {required this.title,
       required this.onAdd,
@@ -22,12 +21,12 @@ class IngredientCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(16.0), // Радиус скругления
+          borderRadius: BorderRadius.circular(16.0),
           child: Image.asset(
             'assets/ingredients/$assetName.webp',
             width: 200,
             height: 200,
-            fit: BoxFit.cover, // Настройка отображения изображения
+            fit: BoxFit.cover,
           ),
         ),
         Text(title),
