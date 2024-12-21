@@ -63,10 +63,3 @@ class CocktailCard extends StatelessWidget {
         ));
   }
 }
-
-/* ,
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,*/
